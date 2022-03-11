@@ -10,6 +10,7 @@
 #include <string>
 #include "provided.h"
 #include "PersonProfile.h"
+#include "RadixTree.h"
 using namespace std;
 
 class MemberDatabase {
@@ -19,6 +20,9 @@ public:
     bool LoadDatabase(std::string filename);
     std::vector<std::string> FindMatchingMembers(const AttValPair& input) const;
     const PersonProfile* GetMemberByEmail(std::string email) const;
+private:
+    RadixTree<vector<std::string>> emailRadixTree;
+    RadixTree<PersonProfile> personRadixTree;
 };
 
 #endif /* MemberDatabase_h */

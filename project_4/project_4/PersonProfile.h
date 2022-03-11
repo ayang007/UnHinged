@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include "provided.h"
+#include "RadixTree.h"
 using namespace std;
 
 class PersonProfile {
@@ -30,6 +31,8 @@ public:
 private:
     std::string m_name;
     std::string m_email;
-    vector<AttValPair> m_personality;
+    int m_numAttributes;
+    RadixTree<vector<std::string>> m_personality;
+    vector<AttValPair> m_attributes;
 };
 #endif /* PersonProfile_h */

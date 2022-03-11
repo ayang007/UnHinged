@@ -10,12 +10,15 @@
 #include "provided.h"
 #include "AttributeTranslator.h"
 #include "MemberDatabase.h"
+#include "RadixTree.h"
 
 class MatchMaker {
 public:
     MatchMaker(const MemberDatabase& mdb, const AttributeTranslator& at);
-    std::vector<EmailCount>
-    IdentifyRankedMatches(std::string email, int threshold) const;
+    std::vector<EmailCount> IdentifyRankedMatches(std::string email, int threshold) const;
+private:
+    MemberDatabase m_memDatabase;
+    AttributeTranslator m_attTranslator;
 };
 
 #endif /* MatchMaker_h */

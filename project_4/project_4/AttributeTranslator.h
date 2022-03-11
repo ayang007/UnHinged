@@ -8,6 +8,7 @@
 #ifndef AttributeTranslator_h
 #define AttributeTranslator_h
 #include "provided.h"
+#include "RadixTree.h"
 
 class AttributeTranslator {
 public:
@@ -18,6 +19,8 @@ public:
     bool Load(std::string filename);
     
     std::vector<AttValPair> FindCompatibleAttValPairs(const AttValPair& source) const;
+private:
+    RadixTree<vector<AttValPair>> m_compatibleRadixTree;
 };
 
 #endif /* AttributeTranslator_h */
