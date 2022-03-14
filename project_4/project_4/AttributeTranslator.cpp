@@ -39,14 +39,15 @@ bool AttributeTranslator::Load(std::string filename) {
         for (int i = 0; i < instring.size(); i++) {
             if (instring[i] == ',') {
                 commaCount++;
+                continue;
             }
-            if (commaCount < 2) {
+            else if (commaCount < 2) {
                 item += instring[i];
             }
-            if (commaCount == 2) {
+            else if (commaCount == 2) {
                 att += instring[i];
             }
-            if (commaCount == 3) {
+            else if (commaCount == 3) {
                 val += instring[i];
             }
         }
@@ -72,7 +73,11 @@ bool AttributeTranslator::Load(std::string filename) {
 
 std::vector<AttValPair> AttributeTranslator::FindCompatibleAttValPairs(const AttValPair& source) const {
     std::string key = source.attribute + "," + source.value;
-    m_compatibleRadixTree.search(key);
-    std::vector<AttValPair> a;
-    return a;
+    std::vector<AttValPair>* a;
+    std::vector<AttValPair> empty;
+    a = &empty;
+    if (m_compatibleRadixTree.search(key) != nullptr) {
+        a = m_compatibleRadixTree.search(key);
+    }
+    return *a;
 }

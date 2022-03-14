@@ -25,8 +25,7 @@ public:
     
     inline
     void insert(std::string key, const ValueType& value) {
-//        RadixTreeNode* newNode = new RadixTreeNode(key, value);
-//        unorderedMap.insert(newNode);
+        
         
         if (unorderedMap.find(key) == unorderedMap.end()) {
             ValueType* a = new ValueType(value);
@@ -35,22 +34,12 @@ public:
         else { //key is found
             ValueType* a = new ValueType(value);
             unorderedMap.find(key)->second = a;
-//            unorderedMap.insert(std::make_pair(key, a));
         }
     }
     
     inline
     ValueType* search(std::string key) const {
-//        RadixTreeNode* curr = m_rootptr;
-//        std::string currWord = key;
-//        while (currWord.size() != 0) {
-//            for (int i = 0; i < curr.word.size(); i++) {
-//                if (curr.word[i] != key[i] {
-//                    return nullptr;
-//                }
-//            }
-//
-//        }
+        
         if (unorderedMap.find(key) == unorderedMap.end()) {
             return nullptr;
         }

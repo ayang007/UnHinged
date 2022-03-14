@@ -44,7 +44,6 @@ int PersonProfile::GetNumAttValPairs() const {
 }
 
 bool PersonProfile::GetAttVal(int attribute_num, AttValPair& attval) const {
-    cout << m_attributes.size();
     if (m_attributes.empty() || attribute_num < 0 || attribute_num >= GetNumAttValPairs()) {
         return false;
     }

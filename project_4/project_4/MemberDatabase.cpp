@@ -36,24 +36,24 @@ bool MemberDatabase::LoadDatabase(std::string filename) {
     while (getline(infile, instring))
     {
         profileLine++;
-        if (instring == "\n") {
+        if (instring == "") {
             profileLine = 0;
             continue;
         }
-        if (profileLine == 1) {
+        else if (profileLine == 1) {
             //this is the name
             tempName = instring;
         }
-        if (profileLine == 2) {
+        else if (profileLine == 2) {
             //this is the email
             tempEmail = instring;
             personRadixTree.insert(instring, PersonProfile(tempName,instring)); //inserts into tree mapping email to person profile
             currentPerson = personRadixTree.search(instring);
         }
-        if (profileLine == 3) {
+        else if (profileLine == 3) {
             //number of attval pairs
         }
-        if (profileLine > 3) {
+        else if (profileLine > 3) {
             //attvals
             std::string att;
             std::string val;
@@ -71,12 +71,13 @@ bool MemberDatabase::LoadDatabase(std::string filename) {
             }
 
             AttValPair newPair = AttValPair(att, val);
+            //inserting this email address under all att val pairs it associates with.
             currentPerson->AddAttValPair(newPair);
             vector<std::string>* emailListPointer;
             vector<std::string> emailList;
             emailListPointer = &emailList;
-            if (emailListPointer != nullptr) {
-                emailListPointer = emailRadixTree.search(att+val);
+            if (emailRadixTree.search(att+val) != nullptr) {
+                emailList = *emailRadixTree.search(att+val);
             }
             emailList.push_back(tempEmail);
             emailRadixTree.insert(att+val, emailList);
@@ -89,7 +90,9 @@ bool MemberDatabase::LoadDatabase(std::string filename) {
 
 std::vector<std::string> MemberDatabase::FindMatchingMembers(const AttValPair& input) const {
     std::string stringAttVal = input.attribute + input.value;
-    vector<std::string> email = *emailRadixTree.search(stringAttVal);
+    vector<std::string> email;
+    if (emailRadixTree.search(stringAttVal) != nullptr)
+        email = *emailRadixTree.search(stringAttVal);
     return email;
 }
 
