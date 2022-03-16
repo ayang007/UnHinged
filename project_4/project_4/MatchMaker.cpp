@@ -26,9 +26,11 @@ std::vector<EmailCount> MatchMaker::IdentifyRankedMatches(std::string email, int
         vector<AttValPair> compatibleAttValVector = m_attTranslator.FindCompatibleAttValPairs(currAttVal);
         //find the compatible emails, people with the compatible attributes.
         for (int j = 0; j < compatibleAttValVector.size(); j++) {
-            tempCompatibleEmails = m_memDatabase.FindMatchingMembers(compatibleAttValVector[i]);
+            tempCompatibleEmails = m_memDatabase.FindMatchingMembers(compatibleAttValVector[j]);
             for (int k = 0; k < tempCompatibleEmails.size(); k++) {
-                //build the final vector with all the emails compatible with all traits of a person
+                //for each of the emails, add it to the final vector with all the emails compatible with all traits of a person, barring your own email.
+                if (tempCompatibleEmails[k] == email)
+                    continue;
                 compatibleEmails.push_back(tempCompatibleEmails[k]);
             }
         }
@@ -37,6 +39,7 @@ std::vector<EmailCount> MatchMaker::IdentifyRankedMatches(std::string email, int
     std::vector<EmailCount>::iterator it;
     it = compatibleEmailList.begin();
     for (int i = 0; i < compatibleEmails.size(); i++) {
+        it = compatibleEmailList.begin();
         while (it != compatibleEmailList.end()) {
             if (it->email == compatibleEmails[i]) {
                 it->count++;

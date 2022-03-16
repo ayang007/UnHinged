@@ -72,7 +72,7 @@ bool AttributeTranslator::Load(std::string filename) {
 }
 
 std::vector<AttValPair> AttributeTranslator::FindCompatibleAttValPairs(const AttValPair& source) const {
-    std::string key = source.attribute + "," + source.value;
+    std::string key = source.attribute + source.value;
     std::vector<AttValPair>* a;
     std::vector<AttValPair> empty;
     a = &empty;

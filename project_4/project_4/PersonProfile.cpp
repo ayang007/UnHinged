@@ -13,6 +13,7 @@ PersonProfile::PersonProfile(std::string name, std::string email) {
     m_name = name;
     m_email = email;
     m_numAttributes = 0;
+    
 }
 
 PersonProfile::~PersonProfile() { }

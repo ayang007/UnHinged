@@ -25,7 +25,7 @@ bool MemberDatabase::LoadDatabase(std::string filename) {
     int profileLine = 0;
     std::string tempName;
     std::string tempEmail;
-    PersonProfile* currentPerson;
+    PersonProfile* currentPerson = nullptr;
 
     // If the file cannot be found, returns false
     if (!infile)
